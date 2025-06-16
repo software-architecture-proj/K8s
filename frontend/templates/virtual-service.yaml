@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: frontend-vs
+  namespace: nova
+spec:
+  gateways:
+    - frontend-gateway
+  hosts:
+    - nova.dmirandam.com
+  http:
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: {{ include "frontend.fullname" . }}
+            port:
+              number: 80
