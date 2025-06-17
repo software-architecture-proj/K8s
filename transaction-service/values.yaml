@@ -7,8 +7,8 @@ image:
   pullSecret: dmirandam-regcred   
 
 service:
-  port: 80
-  targetPort: 8080
+  port: 50051
+  targetPort: 50051
 
 env:                      
   KEY: "value"

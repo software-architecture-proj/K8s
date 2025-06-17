@@ -1,0 +1,12 @@
+apiVersion: rabbitmq.com/v1beta1     
+kind: RabbitmqCluster
+metadata:
+  name: notifications-cluster
+  namespace: rabbitmq                
+spec:
+  replicas: 2
+  persistence:
+    storageClassName: local-path    
+    storage: 20Gi                   
+  service:
+    type: ClusterIP                 

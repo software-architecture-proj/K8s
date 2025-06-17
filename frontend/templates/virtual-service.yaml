@@ -14,6 +14,6 @@ spec:
             prefix: /
       route:
         - destination:
-            host: {{ include "frontend.fullname" . }}
+            host: {{ include "frontend.name" . }}
             port:
               number: 80

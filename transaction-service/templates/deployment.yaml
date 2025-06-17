@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "transaction-service.fullname" . }}
+  name: {{ include "transaction-service.name" . }}
   labels: {{- include "transaction-service.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -30,4 +30,4 @@ spec:
       volumes:
         - name: app-config
           configMap:
-            name: {{ include "transaction-service.fullname" . }}-config
+            name: {{ include "transaction-service.name" . }}-config

@@ -1,0 +1,98 @@
+apiVersion: rabbitmq.com/v1beta1
+kind: Vhost
+metadata:
+  name: notifications-vh
+spec:
+  name: notifications
+  rabbitmqClusterReference:
+    name: notifications-cluster
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: User
+metadata:
+  name: notifier
+spec:
+  importCredentialsSecret:      
+    name: notifier-creds
+  tags: ["management"]          
+  rabbitmqClusterReference:
+    name: notifications-cluster
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Permission
+metadata:
+  name: notifier-perms
+  namespace: rabbitmq
+spec:
+  vhost: notifications
+  user: notifier
+  permissions:          
+    configure: ".*"
+    write:     ".*"
+    read:      ".*"
+  rabbitmqClusterReference:
+    name: notifications-cluster
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Exchange
+metadata:
+  name: notifications-ex
+spec:
+  name: notifications
+  vhost: notifications
+  type: direct                  
+  durable: true
+  rabbitmqClusterReference:
+    name: notifications-cluster
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: sms-notifications
+spec:
+  name: sms_notifications
+  vhost: notifications
+  durable: true
+  arguments:                     
+    x-queue-type: quorum
+  rabbitmqClusterReference:
+    name: notifications-cluster
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Queue
+metadata:
+  name: email-notifications
+spec:
+  name: email_notifications
+  vhost: notifications
+  durable: true
+  arguments:
+    x-queue-type: quorum
+  rabbitmqClusterReference:
+    name: notifications-cluster
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: bind-sms
+spec:
+  vhost: notifications
+  source: notifications          # exchange
+  destination: sms_notifications # queue
+  destinationType: queue
+  routingKey: sms
+  rabbitmqClusterReference:
+    name: notifications-cluster
+---
+apiVersion: rabbitmq.com/v1beta1
+kind: Binding
+metadata:
+  name: bind-email
+spec:
+  vhost: notifications
+  source: notifications
+  destination: email_notifications
+  destinationType: queue
+  routingKey: email
+  rabbitmqClusterReference:
+    name: notifications-cluster

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "api-gateway.fullname" . }}-config
+  name: {{ include "api-gateway.name" . }}-config
 data:
 {{- range $key, $val := .Values.config }}
   {{ $key }}: |-

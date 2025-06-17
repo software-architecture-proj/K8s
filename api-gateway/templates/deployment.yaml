@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "api-gateway.fullname" . }}
+  name: {{ include "api-gateway.name" . }}
   labels: {{- include "api-gateway.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -30,4 +30,4 @@ spec:
       volumes:
         - name: app-config
           configMap:
-            name: {{ include "api-gateway.fullname" . }}-config
+            name: {{ include "api-gateway.name" . }}-config

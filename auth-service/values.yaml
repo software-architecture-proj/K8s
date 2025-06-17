@@ -7,12 +7,12 @@ image:
   pullSecret: dmirandam-regcred   
 
 service:
-  port: 80
-  targetPort: 8080
+  port: 50053
+  targetPort: 50053
 
 env:                      
-  KEY: "value"
-
+  MONGODB_URI: "mongodb://admin:password123@mongodb:27017/auth_db?authSource=admin"
+  MONGODB_DATABASE: "auth_db"
 
 config:                    
   appsettings.json: |

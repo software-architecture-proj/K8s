@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "user-product-service.fullname" . }}
+  name: {{ include "user-product-service.name" . }}
   labels: {{- include "user-product-service.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -30,4 +30,4 @@ spec:
       volumes:
         - name: app-config
           configMap:
-            name: {{ include "user-product-service.fullname" . }}-config
+            name: {{ include "user-product-service.name" . }}-config

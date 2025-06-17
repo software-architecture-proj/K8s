@@ -11,7 +11,7 @@ service:
   targetPort: 3000
 
 env:                      
-  KEY: "value"
+  NEXT_PUBLIC_API_URL: 'http://api_gateway'
 
 config:                    
   appsettings.json: |

@@ -7,12 +7,16 @@ image:
   pullSecret: dmirandam-regcred   
 
 service:
-  port: 80
-  targetPort: 8080
+  port: 50052
+  targetPort: 50052
 
 env:                      
   KEY: "value"
-
+  DB_HOST: nova.enpoint.us-east-1.rds.amazonaws.com
+  DB_PORT: 5432
+  DB_USER: master
+  DB_PASSWORD: password123
+  DB_NAME: postgres
 
 config:                    
   appsettings.json: |

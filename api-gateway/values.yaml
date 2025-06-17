@@ -12,7 +12,9 @@ service:
 
 env:                      
   KEY: "value"
-
+  USER_PRODUCT_SERVICE_GRPC_HOST: "user-product-service:50052"
+  AUTH_SERVICE_GRPC_HOST: "auth-service:50053"
+  TRANSACTION_SERVICE_GRPC_HOST: "transaction-service:50051"
 
 config:                    
   appsettings.json: |

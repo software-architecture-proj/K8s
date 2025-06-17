@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "frontend.fullname" . }}
+  name: {{ include "frontend.name" . }}
   labels: {{- include "frontend.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -30,4 +30,4 @@ spec:
       volumes:
         - name: app-config
           configMap:
-            name: {{ include "frontend.fullname" . }}-config
+            name: {{ include "frontend.name" . }}-config

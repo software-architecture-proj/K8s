@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "auth-service.fullname" . }}
+  name: {{ include "auth-service.name" . }}
   labels: {{- include "auth-service.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
@@ -30,4 +30,4 @@ spec:
       volumes:
         - name: app-config
           configMap:
-            name: {{ include "auth-service.fullname" . }}-config
+            name: {{ include "auth-service.name" . }}-config
