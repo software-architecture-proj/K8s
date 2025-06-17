@@ -1,0 +1,33 @@
+replicaCount: 2
+
+image:
+  repository: registry.dmirandam.com/nova/notification-service
+  tag: "2.0.0"
+  pullPolicy: IfNotPresent
+  pullSecret: dmirandam-regcred   
+
+service:
+  port: 50054
+  targetPort: 50054
+
+env:                      
+  FIREBASE_CREDENTIALS_PATH: ''
+  MAILGUN_DOMAIN: ''
+  MAILGUN_API_KEY: ''
+  SENDER_EMAIL: ''
+
+config:                    
+  appsettings.json: |
+    {
+      "AppSettings": {
+        "FeatureX": true
+      }
+    }
+
+
+autoscaling:
+  enabled: true         
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 80     
+  targetMemoryUtilizationPercentage: 75 
