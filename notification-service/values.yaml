@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: registry.dmirandam.com/nova/notification-service
-  tag: "2.0.0"
+  tag: "3.0.2"
   pullPolicy: IfNotPresent
   pullSecret: dmirandam-regcred   
 
@@ -11,11 +11,10 @@ service:
   targetPort: 50054
 
 env:                      
-  FIREBASE_CREDENTIALS_PATH: ''
-  MAILGUN_DOMAIN: ''
-  MAILGUN_API_KEY: ''
-  SENDER_EMAIL: ''
-
+  MAILGUN_DOMAIN: sandbox7c56f2d3ea2b4ad699f6b59a31530d0d.mailgun.org
+  MAILGUN_API_KEY: ac09d9d15feccfb574f321ea9d6a63df-5bb33252-267ad3b3
+  SENDER_EMAIL: postmaster@sandbox7c56f2d3ea2b4ad699f6b59a31530d0d.mailgun.org
+  AMQP_URL: amqp://notifier:G8Xg2VU84l@notifications-cluster.rabbitmq.svc.cluster.local:5672/notifications
 config:                    
   appsettings.json: |
     {
@@ -23,7 +22,6 @@ config:
         "FeatureX": true
       }
     }
-
 
 autoscaling:
   enabled: true         

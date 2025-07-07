@@ -1,8 +1,8 @@
 replicaCount: 2
 
 image:
-  repository: registry.dmirandam.com/nova/user-product
-  tag: "1.0.0"
+  repository: registry.dmirandam.com/nova/user-product-service
+  tag: "3.0.0"
   pullPolicy: IfNotPresent
   pullSecret: dmirandam-regcred   
 
@@ -12,10 +12,10 @@ service:
 
 env:                      
   KEY: "value"
-  DB_HOST: nova.enpoint.us-east-1.rds.amazonaws.com
+  DB_HOST: nova.cyhmmuwu6zk0.us-east-1.rds.amazonaws.com
   DB_PORT: 5432
   DB_USER: master
-  DB_PASSWORD: password123
+  DB_PASSWORD: 1GInY76aA8vP
   DB_NAME: postgres
 
 config:                    

@@ -2,8 +2,8 @@ replicaCount: 2
 
 image:
   repository: registry.dmirandam.com/nova/frontend
-  tag: "1.0.0"
-  pullPolicy: IfNotPresent
+  tag: "3.0.4"
+  pullPolicy: Always
   pullSecret: dmirandam-regcred   
 
 service:
@@ -11,7 +11,7 @@ service:
   targetPort: 3000
 
 env:                      
-  NEXT_PUBLIC_API_URL: 'http://api_gateway'
+  NEXT_PUBLIC_API_URL: api-gateway:80
 
 config:                    
   appsettings.json: |

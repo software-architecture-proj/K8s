@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: registry.dmirandam.com/nova/auth-service
-  tag: "1.0.0"
+  tag: "3.0.1"
   pullPolicy: IfNotPresent
   pullSecret: dmirandam-regcred   
 
@@ -11,9 +11,8 @@ service:
   targetPort: 50053
 
 env:                      
-  MONGODB_URI: "mongodb://admin:password123@mongodb:27017/auth_db?authSource=admin"
-  MONGODB_DATABASE: "auth_db"
-
+  MONGODB_URI: "mongodb+srv://dsmirandama:1UDV2oVZYjESTftz@nova-auth.mwonkib.mongodb.net/?retryWrites=true&w=majority&appName=Nova-Auth"
+  MONGODB_DATABASE: "Nova-Auth"
 config:                    
   appsettings.json: |
     {
@@ -21,8 +20,6 @@ config:
         "FeatureX": true
       }
     }
-
-
 autoscaling:
   enabled: true         
   minReplicas: 2

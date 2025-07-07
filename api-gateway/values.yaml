@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: registry.dmirandam.com/nova/api-gateway
-  tag: "1.0.0"
+  tag: "3.0.0"
   pullPolicy: IfNotPresent
   pullSecret: dmirandam-regcred   
 
@@ -15,6 +15,7 @@ env:
   USER_PRODUCT_SERVICE_GRPC_HOST: "user-product-service:50052"
   AUTH_SERVICE_GRPC_HOST: "auth-service:50053"
   TRANSACTION_SERVICE_GRPC_HOST: "transaction-service:50051"
+  API_GATEWAY_PORT: 8080
 
 config:                    
   appsettings.json: |
