@@ -10,9 +10,17 @@ service:
   port: 50051
   targetPort: 50051
 
+resources:
+  requests:
+    cpu: 75m
+    memory: 128Mi
+  limits:
+    cpu: 150m
+    memory: 256Mi
+
 env:                      
   KEY: "value"
-  TIGERBEETLE_HOST: '192.168.10.15:3000'
+  TIGERBEETLE_HOST: '192.168.10.14:3000'
 
 config:                    
   appsettings.json: |
@@ -22,10 +30,30 @@ config:
       }
     }
 
-
 autoscaling:
   enabled: true         
   minReplicas: 2
   maxReplicas: 6
   targetCPUUtilizationPercentage: 80     
-  targetMemoryUtilizationPercentage: 75 
+  targetMemoryUtilizationPercentage: 75
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60   
+      selectPolicy: Max                
+      policies:
+      - type: Percent
+        value: 50                      
+        periodSeconds: 30              
+      - type: Pods
+        value: 2                       
+        periodSeconds: 30
+    scaleUp:
+      stabilizationWindowSeconds: 30   
+      selectPolicy: Max
+      policies:
+      - type: Percent
+        value: 100                     
+        periodSeconds: 15
+      - type: Pods
+        value: 3                       
+        periodSeconds: 15

@@ -10,6 +10,14 @@ service:
   port: 50054
   targetPort: 50054
 
+resources:
+  requests:
+    cpu: 75m
+    memory: 128Mi
+  limits:
+    cpu: 150m
+    memory: 256Mi
+
 env:                      
   MAILGUN_DOMAIN: sandbox7c56f2d3ea2b4ad699f6b59a31530d0d.mailgun.org
   MAILGUN_API_KEY: ac09d9d15feccfb574f321ea9d6a63df-5bb33252-267ad3b3
@@ -28,4 +36,25 @@ autoscaling:
   minReplicas: 2
   maxReplicas: 6
   targetCPUUtilizationPercentage: 80     
-  targetMemoryUtilizationPercentage: 75 
+  targetMemoryUtilizationPercentage: 75
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60   
+      selectPolicy: Max                
+      policies:
+      - type: Percent
+        value: 50                      
+        periodSeconds: 30              
+      - type: Pods
+        value: 2                       
+        periodSeconds: 30
+    scaleUp:
+      stabilizationWindowSeconds: 30   
+      selectPolicy: Max
+      policies:
+      - type: Percent
+        value: 100                     
+        periodSeconds: 15
+      - type: Pods
+        value: 3                       
+        periodSeconds: 15

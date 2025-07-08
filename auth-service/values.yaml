@@ -10,6 +10,14 @@ service:
   port: 50053
   targetPort: 50053
 
+resources:
+  requests:
+    cpu: 75m
+    memory: 128Mi
+  limits:
+    cpu: 150m
+    memory: 256Mi
+
 env:                      
   MONGODB_URI: "mongodb+srv://dsmirandama:1UDV2oVZYjESTftz@nova-auth.mwonkib.mongodb.net/?retryWrites=true&w=majority&appName=Nova-Auth"
   MONGODB_DATABASE: "Nova-Auth"
@@ -20,9 +28,31 @@ config:
         "FeatureX": true
       }
     }
+
 autoscaling:
   enabled: true         
   minReplicas: 2
   maxReplicas: 6
   targetCPUUtilizationPercentage: 80     
-  targetMemoryUtilizationPercentage: 75 
+  targetMemoryUtilizationPercentage: 75
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 60   
+      selectPolicy: Max                
+      policies:
+      - type: Percent
+        value: 50                      
+        periodSeconds: 30              
+      - type: Pods
+        value: 2                       
+        periodSeconds: 30
+    scaleUp:
+      stabilizationWindowSeconds: 30   
+      selectPolicy: Max
+      policies:
+      - type: Percent
+        value: 100                     
+        periodSeconds: 15
+      - type: Pods
+        value: 3                       
+        periodSeconds: 15

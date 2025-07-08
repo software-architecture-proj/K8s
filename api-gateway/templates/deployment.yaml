@@ -24,6 +24,8 @@ spec:
             - name: {{ $key }}
               value: "{{ $val }}"
             {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
             - name: app-config
               mountPath: /data/config
