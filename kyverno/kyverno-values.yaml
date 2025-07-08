@@ -1,4 +1,2 @@
-image:
-  pullSecrets:
-    - name: dmirandam-regcred
-
+existingImagePullSecrets:
+  - dmirandam-regcred

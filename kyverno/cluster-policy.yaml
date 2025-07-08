@@ -21,14 +21,38 @@ spec:
 
     verifyImages:
     - imageReferences:
-      - "registry.dmirandam.com/*/*"
+        - "registry.dmirandam.com/nova/*"
       mutateDigest: true
       attestors:
       - count: 1
         entries:
         - keyless:
             issuer:  "https://token.actions.githubusercontent.com"
-            subject: "https://github.com/software-architecture-proj/cicd/.github/workflows/main.yml@refs/heads/main"
+            subject: "https://github.com/software-architecture-proj/nova-frontend/.github/workflows/main.yml@refs/heads/main"
             rekor:    
               url: https://rekor.sigstore.dev
-
+        - keyless:
+            issuer:  "https://token.actions.githubusercontent.com"
+            subject: "https://github.com/software-architecture-proj/nova-backend-auth-service/.github/workflows/main.yml@refs/heads/main"
+            rekor:    
+              url: https://rekor.sigstore.dev
+        - keyless:
+            issuer:  "https://token.actions.githubusercontent.com"
+            subject: "https://github.com/software-architecture-proj/nova-backend-notification-service/.github/workflows/main.yml@refs/heads/main"
+            rekor:    
+              url: https://rekor.sigstore.dev
+        - keyless:
+            issuer:  "https://token.actions.githubusercontent.com"
+            subject: "https://github.com/software-architecture-proj/nova-backend-transaction-service/.github/workflows/main.yml@refs/heads/main"
+            rekor:    
+              url: https://rekor.sigstore.dev
+        - keyless:
+            issuer:  "https://token.actions.githubusercontent.com"
+            subject: "https://github.com/software-architecture-proj/nova-backend-api-gateway/.github/workflows/main.yml@refs/heads/main"
+            rekor:    
+              url: https://rekor.sigstore.dev
+        - keyless:
+            issuer:  "https://token.actions.githubusercontent.com"
+            subject: "https://github.com/software-architecture-proj/nova-backend-user-product-service/.github/workflows/main.yml@refs/heads/main"
+            rekor:    
+              url: https://rekor.sigstore.dev
